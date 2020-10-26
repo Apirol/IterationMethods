@@ -11,54 +11,86 @@ class SLAE
 {
 public:
 	int sizeMatrix;
-	int diagAmount;
-	vector<vector<real>> A;
+	int nonZeroLen1, nonZeroLen2;
+	vector<vector<real>> Al;
+	vector<vector<real>> Au;
+	vector<real> di;
 	vector<int> I;
 	vector<real> B;
 	vector<real> x;
 
 	SLAE() 
 	{
-		A.resize(n);
-		I.resize(n);
+		Al.resize(n);
+		Au.resize(n);
+		di.resize(n);
+		I.resize(7);
 		B.resize(n);
 		x.resize(n);
 	}
 
 	void Init(InputSLAEHandler input)
 	{
-		pair<int, int> sizes = input.InputSize();
-		sizeMatrix = sizes.first;
-		diagAmount = sizes.second;
+		vector<int> sizes = input.InputSize();
+		sizeMatrix = sizes[0];
+		nonZeroLen1 = sizes[1];
+		nonZeroLen2 = sizes[2];
 
-		A = input.InputMatrix(sizeMatrix, diagAmount);
+		Al.resize(sizeMatrix);
+		Au.resize(sizeMatrix);
+		di.resize(sizeMatrix);
+
+		input.InputMatrix(sizeMatrix, &Al, &Au, &di);
 		B = input.InputVectorB(sizeMatrix);
-		I = input.InputVectorI(diagAmount);
+		InitI();
 	}
 
+	void InitI()
+	{
+		I[0] = -3 - nonZeroLen1 - nonZeroLen2;
+		I[1] = -1 - nonZeroLen1 - nonZeroLen2;
+		I[2] = -1;
+
+		I[3] = 0;
+
+		I[4] = -I[2];
+		I[5] = -I[1];
+		I[6] = -I[0];
+	}
 
 	void JakobiSolution()
 	{
-		vector <real> approximationX (n, 0);
+		vector<real> approximationX (7, 0);
 		int err = 1;
 		int eps = 0.001;
 		int MaxIter = 10000;
 		real w = 0.1;
 
-		for (int k = 0; k < MaxIter && err > eps; k++)
+		for (size_t i = 0; i < 7; i++)
+			approximationX[i] = i + 1;
+
+		vector<real> vec(7);
+
+		for (size_t i = 0; i < 7; i++)
+		{
+			vec[i] = Sum(approximationX, i);
+		}
+
+		int sdf = 0;
+
+		/*for (int k = 0; k < MaxIter && err > eps; k++)
 		{
 			vector <real> xK(n, 0);
 			for (int i = 0; i < sizeMatrix; i++)
 			{
-				real sum = Sum(approximationX, A[i]);
+				real sum = Sum(approximationX, i);
 				sum = (w / A[i][I[diagAmount / 2]])* (B[i] - sum);
 				xK[i] = approximationX[i] + sum;
 			}
 			approximationX = xK;
 			err = Inconspicuous(approximationX);
-		}
+		}*/
 	}
-
 
 	inline real norm(vector <real> vector)
 	{
@@ -72,13 +104,13 @@ public:
 	}
 
 
-	inline real Inconspicuous(vector <real> approximationX)
+	/*inline real Inconspicuous(vector <real> approximationX)
 	{
 		return norm(B - Mult(approximationX)) / norm(B);
-	}
+	}*/
 
 
-	vector<real> Mult(vector <real> currentX)
+	/*vector<real> Mult(vector <real> currentX)
 	{
 		vector <real> answer(sizeMatrix);
 
@@ -89,19 +121,25 @@ public:
 		}
 
 		return answer;
-	}
+	}*/
 
-	real Sum(vector <real> currentX, int i)
+	real Sum(vector<real> X, int i)
 	{
-		real answer = 0;
-		
-		int j0 = abs(I[i]);
-		int j1 = j0 + sizeMatrix;
+		real answer = di[i] * X[i];
 
-		/*for (int j = abs(I[i] - 1); j < diagAmount; j++)
-			answer += A[i][j] * currentX[I[j]];*/
+		for (size_t j = 0; j < 3; j++)
+		{
+			int tl = i + I[j];
 
-		
+			if (tl >= 0)
+				answer += Al[i][j] * X[tl];
+
+			int tu = i + I[j + 4];
+
+			if (tu < 7)
+				answer += Au[i][j] * X[tu];
+		}
+
 		return answer;
 	}
 };
