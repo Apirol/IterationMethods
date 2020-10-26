@@ -40,20 +40,23 @@ public:
 	void JakobiSolution()
 	{
 		vector <real> approximationX (n, 0);
-		int err = 0;
+		int err = 1;
 		int eps = 0.001;
 		int MaxIter = 10000;
-		real w = 0;
+		real w = 0.1;
 
 		for (int k = 0; k < MaxIter && err > eps; k++)
 		{
-			for (int i = 0; i < MaxIter && err > eps; i++)
+			vector <real> xK(n, 0);
+			for (int i = 0; i < sizeMatrix; i++)
 			{
-
+				real sum = Sum(approximationX, A[i]);
+				sum = (w / A[i][I[diagAmount / 2]])* (B[i] - sum);
+				xK[i] = approximationX[i] + sum;
 			}
+			approximationX = xK;
+			err = Inconspicuous(approximationX);
 		}
-
-			
 	}
 
 
@@ -88,8 +91,17 @@ public:
 		return answer;
 	}
 
-	vector <real> sum(int jMax)
+	real Sum(vector <real> currentX, int i)
 	{
+		real answer = 0;
+		
+		int j0 = abs(I[i]);
+		int j1 = j0 + sizeMatrix;
 
+		for (int j = abs(I[i] - 1); j < diagAmount; j++)
+			answer += A[i][j] * currentX[I[j]];
+
+		
+		return answer;
 	}
 };
