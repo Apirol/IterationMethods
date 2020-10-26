@@ -1,8 +1,5 @@
-#include <iostream>
 #include "SLAE.h"
 
-
-using namespace std;
 
 int main()
 {

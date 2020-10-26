@@ -27,6 +27,12 @@
     <ClInclude Include="JacobiSolution.h">
       <Filter>Исходные файлы</Filter>
     </ClInclude>
+    <ClInclude Include="Vector.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="Method.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">

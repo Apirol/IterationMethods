@@ -1,11 +1,11 @@
 #pragma once
 #include "InputSLAEHandler.h"
 #include "OutputSLAEHandler.h"
+#include "Vector.h"
 
 typedef double real;
 const int n = 100;
 
-using namespace std;
 
 class SLAE
 {
@@ -37,9 +37,21 @@ public:
 	}
 
 
-	void YakobiSolution()
+	void JakobiSolution()
 	{
-		vector <real> initialX (n, 0);
+		vector <real> approximationX (n, 0);
+		int err = 0;
+		int eps = 0.001;
+		int MaxIter = 10000;
+		real w = 0;
+
+		for (int k = 0; k < MaxIter && err > eps; k++)
+		{
+			for (int i = 0; i < MaxIter && err > eps; i++)
+			{
+
+			}
+		}
 
 			
 	}
@@ -47,13 +59,19 @@ public:
 
 	inline real norm(vector <real> vector)
 	{
+		int size = vector.size();
+		real answer = 0;
 
+		for (int i = 0; i < size; i++)
+			answer += vector[i] * vector[i];
+
+		return sqrt(answer);
 	}
 
 
-	inline real Inconspicuous()
+	inline real Inconspicuous(vector <real> approximationX)
 	{
-		return norm(B)
+		return norm(B - Mult(approximationX)) / norm(B);
 	}
 
 
@@ -61,7 +79,17 @@ public:
 	{
 		vector <real> answer(sizeMatrix);
 
-		for(int i = 0; i < sizeMatrix; i++)
-			answer[i] += 
+		for (int i = 0; i < sizeMatrix; i++)
+		{
+			for (int j = 0; j < diagAmount; j++)
+				answer[i] += A[i][j] * currentX[I[j]];
+		}
+
+		return answer;
+	}
+
+	vector <real> sum(int jMax)
+	{
+
 	}
 };

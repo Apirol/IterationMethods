@@ -141,8 +141,10 @@
   <ItemGroup>
     <ClInclude Include="InputSLAEHandler.h" />
     <ClInclude Include="JacobiSolution.h" />
+    <ClInclude Include="Method.h" />
     <ClInclude Include="OutputSLAEHandler.h" />
     <ClInclude Include="SLAE.h" />
+    <ClInclude Include="Vector.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
