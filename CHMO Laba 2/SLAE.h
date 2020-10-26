@@ -98,8 +98,8 @@ public:
 		int j0 = abs(I[i]);
 		int j1 = j0 + sizeMatrix;
 
-		for (int j = abs(I[i] - 1); j < diagAmount; j++)
-			answer += A[i][j] * currentX[I[j]];
+		/*for (int j = abs(I[i] - 1); j < diagAmount; j++)
+			answer += A[i][j] * currentX[I[j]];*/
 
 		
 		return answer;
