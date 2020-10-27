@@ -25,17 +25,18 @@ public:
 		this->fileNameB = fileNameB;
 	}
 
-	vector<int> InputSize()
+	void InputInfo(int* n, int* m, int* k, int* maxiter, real* eps)
 	{
-		vector<int> sizes (3);
 		ifstream fin;
 		fin.open(fileNameSize + ".txt");
 
-		fin >> sizes[0];
-		fin >> sizes[1];
-		fin >> sizes[2];
+		string s;
 
-		return sizes;
+		fin >> s >> *n;
+		fin >> s >> *m;
+		fin >> s >> *k;
+		fin >> s >> *maxiter;
+		fin >> s >> *eps;
 	}
 
 	void InputMatrix(int sizeMatrix, vector<vector<real>>* Al, vector<vector<real>>* Au, vector<real>* di)
@@ -62,7 +63,7 @@ public:
 	{
 		vector <real> B(sizeMatrix);
 		ifstream fin;
-		fin.open(fileNameI + ".txt");
+		fin.open(fileNameB + ".txt");
 
 		for (int i = 0; i < sizeMatrix; i++)
 			fin >> B[i];

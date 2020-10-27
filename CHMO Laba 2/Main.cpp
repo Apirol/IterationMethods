@@ -4,9 +4,10 @@
 int main()
 {
 	SLAE slae;
-	InputSLAEHandler input{ "I", "A", "Size", "B" };
+	InputSLAEHandler input{ "I", "A", "Info", "B" };
 
 	slae.Init(input);
-	slae.JakobiSolution();
+	//slae.JakobiSolution();
+	slae.SeidelSolution();
 	return 0;
 }

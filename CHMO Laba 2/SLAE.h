@@ -6,18 +6,22 @@
 typedef double real;
 const int n = 100;
 
-
 class SLAE
 {
 public:
 	int sizeMatrix;
 	int nonZeroLen1, nonZeroLen2;
+	int maxiter;
+	real eps;
+
 	vector<vector<real>> Al;
 	vector<vector<real>> Au;
 	vector<real> di;
 	vector<int> I;
 	vector<real> B;
-	vector<real> x;
+	vector<real> X;
+
+	real normB;
 
 	SLAE() 
 	{
@@ -26,23 +30,22 @@ public:
 		di.resize(n);
 		I.resize(7);
 		B.resize(n);
-		x.resize(n);
+		X.resize(n);
 	}
 
 	void Init(InputSLAEHandler input)
 	{
-		vector<int> sizes = input.InputSize();
-		sizeMatrix = sizes[0];
-		nonZeroLen1 = sizes[1];
-		nonZeroLen2 = sizes[2];
+		input.InputInfo(&sizeMatrix, &nonZeroLen1, &nonZeroLen2, &maxiter, &eps);
 
 		Al.resize(sizeMatrix);
 		Au.resize(sizeMatrix);
 		di.resize(sizeMatrix);
+		X.resize(sizeMatrix);
 
 		input.InputMatrix(sizeMatrix, &Al, &Au, &di);
 		B = input.InputVectorB(sizeMatrix);
 		InitI();
+		normB = Norm(B);
 	}
 
 	void InitI()
@@ -58,88 +61,116 @@ public:
 		I[6] = -I[0];
 	}
 
+	inline real Iteration(real xki, real w, vector<real> vecAl, vector<real> vecDiAu, real i)
+	{
+		return xki + w * (B[i] - Sum(vecAl, vecDiAu, i)) / di[i];
+	}
+
 	void JakobiSolution()
 	{
-		vector<real> approximationX (7, 0);
-		int err = 1;
-		int eps = 0.001;
-		int MaxIter = 10000;
-		real w = 0.1;
+		vector<real> xk (sizeMatrix, 0);
+		real err = 1;
+		real w = 1;
 
-		for (size_t i = 0; i < 7; i++)
-			approximationX[i] = i + 1;
-
-		vector<real> vec(7);
-
-		for (size_t i = 0; i < 7; i++)
+		for (int k = 0; k < maxiter && err > eps; k++)
 		{
-			vec[i] = Sum(approximationX, i);
-		}
+			vector <real> xk1(sizeMatrix, 0);
 
-		int sdf = 0;
-
-		/*for (int k = 0; k < MaxIter && err > eps; k++)
-		{
-			vector <real> xK(n, 0);
 			for (int i = 0; i < sizeMatrix; i++)
-			{
-				real sum = Sum(approximationX, i);
-				sum = (w / A[i][I[diagAmount / 2]])* (B[i] - sum);
-				xK[i] = approximationX[i] + sum;
-			}
-			approximationX = xK;
-			err = Inconspicuous(approximationX);
-		}*/
-	}
+				xk1[i] = Iteration(xk[i], w, xk, xk, i);
 
-	inline real norm(vector <real> vector)
-	{
-		int size = vector.size();
-		real answer = 0;
-
-		for (int i = 0; i < size; i++)
-			answer += vector[i] * vector[i];
-
-		return sqrt(answer);
-	}
-
-
-	/*inline real Inconspicuous(vector <real> approximationX)
-	{
-		return norm(B - Mult(approximationX)) / norm(B);
-	}*/
-
-
-	/*vector<real> Mult(vector <real> currentX)
-	{
-		vector <real> answer(sizeMatrix);
-
-		for (int i = 0; i < sizeMatrix; i++)
-		{
-			for (int j = 0; j < diagAmount; j++)
-				answer[i] += A[i][j] * currentX[I[j]];
+			xk = xk1;
+			err = Inconspicuous(xk);
 		}
 
-		return answer;
-	}*/
+		X = xk;
+	}
 
-	real Sum(vector<real> X, int i)
+	void SeidelSolution()
 	{
-		real answer = di[i] * X[i];
+		vector<real> xk(sizeMatrix, 0);
+		real err = 1;
+		real w = 1;
+
+		for (int k = 0; k < maxiter && err > eps; k++)
+		{
+			vector <real> xk1(sizeMatrix, 0);
+
+			for (int i = 0; i < sizeMatrix; i++)
+				xk1[i] = Iteration(xk[i], w, xk1, xk, i);
+
+			xk = xk1;
+			err = Inconspicuous(xk);
+		}
+
+		X = xk;
+	}
+
+	real Sum(vector<real> vecAl, vector<real> vecDiAu, int i)
+	{
+		return SumAl(vecAl, i) + SumDiAu(vecDiAu, i);
+	}
+
+	real Sum(vector<real> vec, int i)
+	{
+		return Sum(vec, vec, i);
+	}
+
+	real SumAl(vector<real> vec, int i)
+	{
+		real answer = 0;
 
 		for (size_t j = 0; j < 3; j++)
 		{
 			int tl = i + I[j];
 
 			if (tl >= 0)
-				answer += Al[i][j] * X[tl];
-
-			int tu = i + I[j + 4];
-
-			if (tu < 7)
-				answer += Au[i][j] * X[tu];
+				answer += Al[i][j] * vec[tl];
 		}
 
 		return answer;
 	}
+
+	real SumDiAu(vector<real> vec, int i)
+	{
+		real answer = di[i] * vec[i];
+
+		for (size_t j = 0; j < 3; j++)
+		{
+			int tu = i + I[j + 4];
+
+			if (tu < sizeMatrix)
+				answer += Au[i][j] * vec[tu];
+		}
+
+		return answer;
+	}
+
+	vector<real> MatVecMult(vector<real> vec)
+	{
+		vector<real> answer(sizeMatrix);
+
+		for (int i = 0; i < sizeMatrix; i++)
+			answer[i] = Sum(vec, i);
+
+		return answer;
+	}
+
+	inline real Norm(vector<real> vec)
+	{
+		int size = vec.size();
+		real answer = 0;
+
+		for (int i = 0; i < size; i++)
+			answer += vec[i] * vec[i];
+
+		return sqrt(answer);
+	}
+
+	inline real Inconspicuous(vector<real> vec)
+	{
+		return Norm(B - MatVecMult(vec)) / normB;
+	}
+
+	
 };
