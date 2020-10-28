@@ -1,4 +1,4 @@
-#pragma once
+п»ї#pragma once
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -25,7 +25,7 @@ public:
 		this->fileNameB = fileNameB;
 	}
 
-	// Ввод необходимой для решения информации 
+	// Р’РІРѕРґ РЅРµРѕР±С…РѕРґРёРјРѕР№ РґР»СЏ СЂРµС€РµРЅРёСЏ РёРЅС„РѕСЂРјР°С†РёРё 
 	void InputInfo(int* n, int* m, int* k, int* maxiter, real* eps)
 	{
 		ifstream fin;
@@ -40,7 +40,7 @@ public:
 		fin >> s >> *eps;
 	}
 
-	// Ввод матрицы
+	// Р’РІРѕРґ РјР°С‚СЂРёС†С‹
 	void InputMatrix(int sizeMatrix, vector<vector<real>>* Al, vector<vector<real>>* Au, vector<real>* di)
 	{
 		ifstream fin;
@@ -61,7 +61,7 @@ public:
 		fin.close();
 	}
 
-	// Ввод вектора правой части
+	// Р’РІРѕРґ РІРµРєС‚РѕСЂР° РїСЂР°РІРѕР№ С‡Р°СЃС‚Рё
 	vector <real> InputVectorB(int sizeMatrix)
 	{
 		vector <real> B(sizeMatrix);

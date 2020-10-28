@@ -1,4 +1,4 @@
-#pragma once
+п»ї#pragma once
 #include "InputSLAEHandler.h"
 #include "OutputSLAEHandler.h"
 #include "Vector.h"
@@ -33,10 +33,10 @@ public:
 		X.resize(n);
 	}
 
-	// Инициализация матрицы 
+	// РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РјР°С‚СЂРёС†С‹ 
 	void Init(InputSLAEHandler input)
 	{
-		// Ввод размерностей, максимального числа итераций и точности решения
+		// Р’РІРѕРґ СЂР°Р·РјРµСЂРЅРѕСЃС‚РµР№, РјР°РєСЃРёРјР°Р»СЊРЅРѕРіРѕ С‡РёСЃР»Р° РёС‚РµСЂР°С†РёР№ Рё С‚РѕС‡РЅРѕСЃС‚Рё СЂРµС€РµРЅРёСЏ
 		input.InputInfo(&sizeMatrix, &nonZeroLen1, &nonZeroLen2, &maxiter, &eps);
 
 		Al.resize(sizeMatrix);
@@ -44,16 +44,16 @@ public:
 		di.resize(sizeMatrix);
 		X.resize(sizeMatrix);
 
-		// Ввод матрицы
+		// Р’РІРѕРґ РјР°С‚СЂРёС†С‹
 		input.InputMatrix(sizeMatrix, &Al, &Au, &di);
 
-		// Ввод вектора правой части
+		// Р’РІРѕРґ РІРµРєС‚РѕСЂР° РїСЂР°РІРѕР№ С‡Р°СЃС‚Рё
 		B = input.InputVectorB(sizeMatrix);
 
-		// Расчет массива I со сдвигами диагоналей
+		// Р Р°СЃС‡РµС‚ РјР°СЃСЃРёРІР° I СЃРѕ СЃРґРІРёРіР°РјРё РґРёР°РіРѕРЅР°Р»РµР№
 		InitI();
 
-		// Расчет нормы вектора правой части
+		// Р Р°СЃС‡РµС‚ РЅРѕСЂРјС‹ РІРµРєС‚РѕСЂР° РїСЂР°РІРѕР№ С‡Р°СЃС‚Рё
 		normB = Norm(B);
 	}
 
@@ -70,13 +70,13 @@ public:
 		I[6] = -I[0];
 	}
 
-	// Функция итерационного шага
+	// Р¤СѓРЅРєС†РёСЏ РёС‚РµСЂР°С†РёРѕРЅРЅРѕРіРѕ С€Р°РіР°
 	inline real Iteration(real xki, real w, vector<real> vecAl, vector<real> vecDiAu, real i)
 	{
 		return xki + w * (B[i] - Sum(vecAl, vecDiAu, i)) / di[i];
 	}
 
-	// Метод Якоби
+	// РњРµС‚РѕРґ РЇРєРѕР±Рё
 	void JakobiSolution()
 	{
 		vector<real> xk (sizeMatrix, 0);
@@ -97,7 +97,7 @@ public:
 		X = xk;
 	}
 
-	// Метод Гаусса-Зейделя
+	// РњРµС‚РѕРґ Р“Р°СѓСЃСЃР°-Р—РµР№РґРµР»СЏ
 	void SeidelSolution()
 	{
 		vector<real> xk(sizeMatrix, 0);
@@ -118,8 +118,8 @@ public:
 		X = xk;
 	}
 
-	// Умножение i-той строки нижнего треугольника матрицы на вектор vecAl,
-	// плюс умножение i-той строки верхнего треугольника матрицы на вектор vecDiAu
+	// РЈРјРЅРѕР¶РµРЅРёРµ i-С‚РѕР№ СЃС‚СЂРѕРєРё РЅРёР¶РЅРµРіРѕ С‚СЂРµСѓРіРѕР»СЊРЅРёРєР° РјР°С‚СЂРёС†С‹ РЅР° РІРµРєС‚РѕСЂ vecAl,
+	// РїР»СЋСЃ СѓРјРЅРѕР¶РµРЅРёРµ i-С‚РѕР№ СЃС‚СЂРѕРєРё РІРµСЂС…РЅРµРіРѕ С‚СЂРµСѓРіРѕР»СЊРЅРёРєР° РјР°С‚СЂРёС†С‹ РЅР° РІРµРєС‚РѕСЂ vecDiAu
 	real Sum(vector<real> vecAl, vector<real> vecDiAu, int i)
 	{
 		return SumAl(vecAl, i) + SumDiAu(vecDiAu, i);
@@ -130,7 +130,7 @@ public:
 		return Sum(vec, vec, i);
 	}
 
-	// Умножение i-той строки нижнего треугольника матрицы на вектор vec
+	// РЈРјРЅРѕР¶РµРЅРёРµ i-С‚РѕР№ СЃС‚СЂРѕРєРё РЅРёР¶РЅРµРіРѕ С‚СЂРµСѓРіРѕР»СЊРЅРёРєР° РјР°С‚СЂРёС†С‹ РЅР° РІРµРєС‚РѕСЂ vec
 	real SumAl(vector<real> vec, int i)
 	{
 		real answer = 0;
@@ -146,7 +146,7 @@ public:
 		return answer;
 	}
 
-	// Умножение i-той строки верхнего треугольника матрицы на вектор vecDiAu
+	// РЈРјРЅРѕР¶РµРЅРёРµ i-С‚РѕР№ СЃС‚СЂРѕРєРё РІРµСЂС…РЅРµРіРѕ С‚СЂРµСѓРіРѕР»СЊРЅРёРєР° РјР°С‚СЂРёС†С‹ РЅР° РІРµРєС‚РѕСЂ vecDiAu
 	real SumDiAu(vector<real> vec, int i)
 	{
 		real answer = di[i] * vec[i];
@@ -162,7 +162,7 @@ public:
 		return answer;
 	}
 
-	// Умножение матрицы на вектор
+	// РЈРјРЅРѕР¶РµРЅРёРµ РјР°С‚СЂРёС†С‹ РЅР° РІРµРєС‚РѕСЂ
 	vector<real> MatVecMult(vector<real> vec)
 	{
 		vector<real> answer(sizeMatrix);
@@ -173,7 +173,7 @@ public:
 		return answer;
 	}
 
-	// Расчет нормы вектора
+	// Р Р°СЃС‡РµС‚ РЅРѕСЂРјС‹ РІРµРєС‚РѕСЂР°
 	inline real Norm(vector<real> vec)
 	{
 		int size = vec.size();
@@ -185,7 +185,7 @@ public:
 		return sqrt(answer);
 	}
 
-	// Рачет невязки
+	// Р Р°С‡РµС‚ РЅРµРІСЏР·РєРё
 	inline real Inconspicuous(vector<real> vec)
 	{
 		return Norm(B - MatVecMult(vec)) / normB;
