@@ -25,7 +25,7 @@ public:
 		this->fileNameB = fileNameB;
 	}
 
-	// Ввод необходимой для решения информации
+	// Ввод необходимой для решения информации 
 	void InputInfo(int* n, int* m, int* k, int* maxiter, real* eps)
 	{
 		ifstream fin;
