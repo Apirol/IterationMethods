@@ -33,8 +33,10 @@ public:
 		X.resize(n);
 	}
 
+	// Инициализация матрицы
 	void Init(InputSLAEHandler input)
 	{
+		// Ввод размерностей, максимального числа итераций и точности решения
 		input.InputInfo(&sizeMatrix, &nonZeroLen1, &nonZeroLen2, &maxiter, &eps);
 
 		Al.resize(sizeMatrix);
@@ -42,9 +44,16 @@ public:
 		di.resize(sizeMatrix);
 		X.resize(sizeMatrix);
 
+		// Ввод матрицы
 		input.InputMatrix(sizeMatrix, &Al, &Au, &di);
+
+		// Ввод вектора правой части
 		B = input.InputVectorB(sizeMatrix);
+
+		// Расчет массива I со сдвигами диагоналей
 		InitI();
+
+		// Расчет нормы вектора правой части
 		normB = Norm(B);
 	}
 
@@ -61,11 +70,13 @@ public:
 		I[6] = -I[0];
 	}
 
+	// Функция итерационного шага
 	inline real Iteration(real xki, real w, vector<real> vecAl, vector<real> vecDiAu, real i)
 	{
 		return xki + w * (B[i] - Sum(vecAl, vecDiAu, i)) / di[i];
 	}
 
+	// Метод Якоби
 	void JakobiSolution()
 	{
 		vector<real> xk (sizeMatrix, 0);
@@ -86,6 +97,7 @@ public:
 		X = xk;
 	}
 
+	// Метод Гаусса-Зейделя
 	void SeidelSolution()
 	{
 		vector<real> xk(sizeMatrix, 0);
@@ -106,6 +118,8 @@ public:
 		X = xk;
 	}
 
+	// Умножение i-той строки нижнего треугольника матрицы на вектор vecAl,
+	// плюс умножение i-той строки верхнего треугольника матрицы на вектор vecDiAu
 	real Sum(vector<real> vecAl, vector<real> vecDiAu, int i)
 	{
 		return SumAl(vecAl, i) + SumDiAu(vecDiAu, i);
@@ -116,6 +130,7 @@ public:
 		return Sum(vec, vec, i);
 	}
 
+	// Умножение i-той строки нижнего треугольника матрицы на вектор vec
 	real SumAl(vector<real> vec, int i)
 	{
 		real answer = 0;
@@ -131,6 +146,7 @@ public:
 		return answer;
 	}
 
+	// Умножение i-той строки верхнего треугольника матрицы на вектор vecDiAu
 	real SumDiAu(vector<real> vec, int i)
 	{
 		real answer = di[i] * vec[i];
@@ -146,6 +162,7 @@ public:
 		return answer;
 	}
 
+	// Умножение матрицы на вектор
 	vector<real> MatVecMult(vector<real> vec)
 	{
 		vector<real> answer(sizeMatrix);
@@ -156,6 +173,7 @@ public:
 		return answer;
 	}
 
+	// Расчет нормы вектора
 	inline real Norm(vector<real> vec)
 	{
 		int size = vec.size();
@@ -167,10 +185,9 @@ public:
 		return sqrt(answer);
 	}
 
+	// Рачет невязки
 	inline real Inconspicuous(vector<real> vec)
 	{
 		return Norm(B - MatVecMult(vec)) / normB;
 	}
-
-	
 };

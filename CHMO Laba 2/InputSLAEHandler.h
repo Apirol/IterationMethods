@@ -25,6 +25,7 @@ public:
 		this->fileNameB = fileNameB;
 	}
 
+	// ¬вод необходимой дл€ решени€ информации
 	void InputInfo(int* n, int* m, int* k, int* maxiter, real* eps)
 	{
 		ifstream fin;
@@ -39,6 +40,7 @@ public:
 		fin >> s >> *eps;
 	}
 
+	// ¬вод матрицы
 	void InputMatrix(int sizeMatrix, vector<vector<real>>* Al, vector<vector<real>>* Au, vector<real>* di)
 	{
 		ifstream fin;
@@ -59,6 +61,7 @@ public:
 		fin.close();
 	}
 
+	// ¬вод вектора правой части
 	vector <real> InputVectorB(int sizeMatrix)
 	{
 		vector <real> B(sizeMatrix);
