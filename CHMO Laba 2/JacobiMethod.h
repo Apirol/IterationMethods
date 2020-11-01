@@ -26,4 +26,6 @@ public:
 
 		slae.X = xk;
 	}
+
+	virtual void ReportSolution(OutputSolution out) {};
 };
