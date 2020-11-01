@@ -140,9 +140,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="InputSLAEHandler.h" />
-    <ClInclude Include="JacobiSolution.h" />
-    <ClInclude Include="Method.h" />
+    <ClInclude Include="JacobiMethod.h" />
+    <ClInclude Include="IMethod.h" />
+    <ClInclude Include="NotBlockMethod.h" />
     <ClInclude Include="OutputSLAEHandler.h" />
+    <ClInclude Include="SeidelMethod.h" />
     <ClInclude Include="SLAE.h" />
     <ClInclude Include="Vector.h" />
   </ItemGroup>
