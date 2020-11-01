@@ -36,9 +36,6 @@
     <ClInclude Include="SeidelMethod.h">
       <Filter>Файлы заголовков\Methods\NotBlock</Filter>
     </ClInclude>
-    <ClInclude Include="OutputSLAEHandler.h">
-      <Filter>Файлы заголовков\In/Out</Filter>
-    </ClInclude>
     <ClInclude Include="InputSLAEHandler.h">
       <Filter>Файлы заголовков\In/Out</Filter>
     </ClInclude>
@@ -50,6 +47,9 @@
     </ClInclude>
     <ClInclude Include="IMethod.h">
       <Filter>Файлы заголовков\Methods</Filter>
+    </ClInclude>
+    <ClInclude Include="OutputSolution.h">
+      <Filter>Файлы заголовков\In/Out</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

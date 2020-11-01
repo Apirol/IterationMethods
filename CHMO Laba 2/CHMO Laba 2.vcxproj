@@ -143,7 +143,7 @@
     <ClInclude Include="JacobiMethod.h" />
     <ClInclude Include="IMethod.h" />
     <ClInclude Include="NotBlockMethod.h" />
-    <ClInclude Include="OutputSLAEHandler.h" />
+    <ClInclude Include="OutputSolution.h" />
     <ClInclude Include="SeidelMethod.h" />
     <ClInclude Include="SLAE.h" />
     <ClInclude Include="Vector.h" />

@@ -1,7 +1,4 @@
 #pragma once
-#include "InputSLAEHandler.h"
-#include "OutputSLAEHandler.h"
-#include "Vector.h"
 #include "NotBlockMethod.h"
 
 class SeidelMethod : public NotBlockMethod

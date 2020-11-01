@@ -1,6 +1,5 @@
 #pragma once
-#include "InputSLAEHandler.h"
-#include "OutputSLAEHandler.h"
+#include "OutputSolution.h"
 #include "Vector.h"
 #include "SLAE.h"
 
@@ -13,4 +12,6 @@ public:
 	virtual real Inconspicuous() = 0;
 
 	virtual inline real Iteration() = 0;
+
+	virtual void ReportSolution() = 0;
 };
