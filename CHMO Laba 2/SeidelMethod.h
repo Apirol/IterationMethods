@@ -7,7 +7,7 @@ public:
 	SeidelMethod(SLAE slae) : NotBlockMethod(slae) { };
 
 
-	void Solution()
+	void Solution() override
 	{
 		vector<real> xk(slae.sizeMatrix, 0);
 		real err = 1;
@@ -28,5 +28,5 @@ public:
 	}
 
 
-	virtual void ReportSolution(OutputSolution out) {};
+	void ReportSolution() override {};
 };

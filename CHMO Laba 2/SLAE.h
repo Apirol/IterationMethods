@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include "InputSLAEHandler.h"
-#include "OutputSLAEHandler.h"
+#include "OutputSolution.h"
 #include "Vector.h"
 
 typedef double real;

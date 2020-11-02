@@ -7,7 +7,7 @@ public:
 	JakobiMethod(SLAE slae) : NotBlockMethod(slae) { };
 
 
-	virtual void Solution()
+	void Solution() override
 	{
 		vector<real> xk(slae.sizeMatrix, 0);
 		real err = 1;
@@ -27,5 +27,5 @@ public:
 		slae.X = xk;
 	}
 
-	virtual void ReportSolution(OutputSolution out) {};
+	void ReportSolution() override {};
 };

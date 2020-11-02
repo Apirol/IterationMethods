@@ -4,7 +4,7 @@
 
 class NotBlockMethod : IMethod
 {
-public:
+protected:
 	SLAE slae;
 
 	NotBlockMethod(SLAE slae)
@@ -12,20 +12,24 @@ public:
 		this->slae = slae;
 	}
 
+	virtual void Solution() { cout << "Solution was failed"; };
 
-	virtual inline real Iteration(real xki, real w, vector<real> vecAl, vector<real> vecDiAu, real i)
+	virtual void ReportSolution() { cout << "Report was failed"; };
+
+
+	inline real Iteration(real xki, real w, vector<real> vecAl, vector<real> vecDiAu, real i) 
 	{
 		return xki + w * (slae.B[i] - Sum(vecAl, vecDiAu, i)) / slae.di[i];
 	}
 
 
-	virtual inline real Inconspicuous(vector<real> vec)
+	inline real Inconspicuous(vector<real> vec) 
 	{
 		return slae.Norm(slae.B - MatVecMult(vec)) / slae.normB;
 	}
 
 	// Умножение матрицы на вектор
-	virtual vector<real> MatVecMult(vector<real> vec)
+	vector<real> MatVecMult(vector<real> vec) 
 	{
 		vector<real> answer(slae.sizeMatrix);
 
@@ -80,5 +84,4 @@ public:
 		return answer;
 	}
 
-	virtual void Solution() = 0;
 };

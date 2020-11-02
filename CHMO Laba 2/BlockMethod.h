@@ -4,7 +4,7 @@
 
 class BlockMethod : IMethod
 {
-public:
+protected:
 	SLAE slae;
 
 	BlockMethod(SLAE slae)

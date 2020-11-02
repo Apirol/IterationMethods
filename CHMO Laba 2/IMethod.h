@@ -7,11 +7,10 @@ class IMethod
 {
 public:
 
-	virtual vector<real> MatVecMult() = 0;
+	virtual inline real Iteration(real xki, real w, vector<real> vecAl, vector<real> vecDiAu, real i) = 0;
 
-	virtual real Inconspicuous() = 0;
+	virtual vector<real> MatVecMult(vector<real> vec) = 0;
 
-	virtual inline real Iteration() = 0;
+	virtual real Inconspicuous(vector<real> vec) = 0;
 
-	virtual void ReportSolution() = 0;
 };
