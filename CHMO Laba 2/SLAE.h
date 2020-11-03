@@ -71,7 +71,6 @@ public:
 		I[6] = -I[0];
 	}
 
-
 	// Расчет нормы вектора
 	inline real Norm(vector<real> vec)
 	{

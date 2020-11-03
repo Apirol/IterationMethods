@@ -12,16 +12,16 @@ protected:
 		this->slae = slae;
 	}
 
-	virtual void Solution() { cout << "Solution was failed"; };
+	virtual int Solution(real w) { cout << "Solution was failed"; return 0; };
 
-	virtual void ReportSolution() { cout << "Report was failed"; };
+	virtual void ReportSolution(ofstream* fout) { cout << "Report was failed"; };
 
+	virtual real FindMinW() { return 0; };
 
 	inline real Iteration(real xki, real w, vector<real> vecAl, vector<real> vecDiAu, real i) 
 	{
 		return xki + w * (slae.B[i] - Sum(vecAl, vecDiAu, i)) / slae.di[i];
 	}
-
 
 	inline real Inconspicuous(vector<real> vec) 
 	{
@@ -44,14 +44,12 @@ protected:
 		return Sum(vec, vec, i);
 	}
 
-
 	// Умножение i-той строки нижнего треугольника матрицы на вектор vecAl,
 	// плюс умножение i-той строки верхнего треугольника матрицы на вектор vecDiAu
 	real Sum(vector<real> vecAl, vector<real> vecDiAu, int i)
 	{
 		return SumAl(vecAl, i) + SumDiAu(vecDiAu, i);
 	}
-
 
 	// Умножение i-той строки нижнего треугольника матрицы на вектор vec
 	real SumAl(vector<real> vec, int i)
@@ -83,5 +81,4 @@ protected:
 
 		return answer;
 	}
-
 };

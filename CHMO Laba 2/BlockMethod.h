@@ -5,13 +5,16 @@
 class BlockMethod : IMethod
 {
 protected:
-	SLAE slae;
+	vector<vector<SLAE>> slaes;
 
 	BlockMethod(SLAE slae)
 	{
 		this->slae = slae;
 	}
 
+	virtual void Solution() { cout << "Solution was failed"; };
+
+	virtual void ReportSolution() { cout << "Report was failed"; };
 
 	virtual vector<real> MatVecMult() = 0;
 

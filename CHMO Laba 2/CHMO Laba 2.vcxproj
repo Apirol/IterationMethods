@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="BlockMethod.h" />
+    <ClInclude Include="BlockRelax.h" />
     <ClInclude Include="InputSLAEHandler.h" />
     <ClInclude Include="JacobiMethod.h" />
     <ClInclude Include="IMethod.h" />

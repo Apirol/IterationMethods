@@ -54,6 +54,9 @@
     <ClInclude Include="BlockMethod.h">
       <Filter>Файлы заголовков\Methods\Block</Filter>
     </ClInclude>
+    <ClInclude Include="BlockRelax.h">
+      <Filter>Файлы заголовков\Methods\Block</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">

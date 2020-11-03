@@ -10,7 +10,12 @@ int main()
 	slae.Init(input);
 
 	JakobiMethod Jacobi{ slae };
-	Jacobi.Solution();
+
+	ofstream fout;
+	fout.open("reportJacobi.txt");
+	Jacobi.ReportSolution(&fout);
+	fout.close();
+	//Jacobi.Solution();
 
 	/*SeidelMethod Seidel{ slae };
 	Seidel.Solution();*/

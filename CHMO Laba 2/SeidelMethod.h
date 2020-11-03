@@ -6,14 +6,13 @@ class SeidelMethod : public NotBlockMethod
 public:
 	SeidelMethod(SLAE slae) : NotBlockMethod(slae) { };
 
-
-	void Solution() override
+	int Solution(real w) override
 	{
 		vector<real> xk(slae.sizeMatrix, 0);
 		real err = 1;
-		real w = 1;
 
-		for (int k = 0; k < slae.maxiter && err > slae.eps; k++)
+		int k = 0;
+		while (k < slae.maxiter && err > slae.eps)
 		{
 			vector <real> xk1(slae.sizeMatrix, 0);
 
@@ -22,11 +21,13 @@ public:
 
 			xk = xk1;
 			err = Inconspicuous(xk);
+			k++;
 		}
 
 		slae.X = xk;
+		return k;
 	}
 
 
-	void ReportSolution() override {};
+	void ReportSolution(ofstream* fout) override {};
 };
