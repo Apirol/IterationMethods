@@ -1,35 +1,32 @@
 #pragma once
-#include "IMethod.h"
+#include "Method.h"
 
 
-class NotBlockMethod : IMethod
+class IterationMethod: Method
 {
-protected:
+public:
+
 	SLAE slae;
 
-	NotBlockMethod(SLAE slae)
+	IterationMethod(SLAE slae)
 	{
 		this->slae = slae;
 	}
 
-	virtual int Solution(real w) { cout << "Solution was failed"; return 0; };
 
-	virtual void ReportSolution(ofstream* fout) { cout << "Report was failed"; };
-
-	virtual real FindMinW() { return 0; };
-
-	inline real Iteration(real xki, real w, vector<real> vecAl, vector<real> vecDiAu, real i) 
+	inline real Iteration(real xki, real w, vector<real> vecAl, vector<real> vecDiAu, real i)
 	{
 		return xki + w * (slae.B[i] - Sum(vecAl, vecDiAu, i)) / slae.di[i];
 	}
 
-	inline real Inconspicuous(vector<real> vec) 
+	inline real Inconspicuous(vector<real> vec)
 	{
 		return slae.Norm(slae.B - MatVecMult(vec)) / slae.normB;
 	}
 
+
 	// Умножение матрицы на вектор
-	vector<real> MatVecMult(vector<real> vec) 
+	vector<real> MatVecMult(vector<real> vec)
 	{
 		vector<real> answer(slae.sizeMatrix);
 
@@ -39,10 +36,12 @@ protected:
 		return answer;
 	}
 
+
 	real Sum(vector<real> vec, int i)
 	{
 		return Sum(vec, vec, i);
 	}
+
 
 	// Умножение i-той строки нижнего треугольника матрицы на вектор vecAl,
 	// плюс умножение i-той строки верхнего треугольника матрицы на вектор vecDiAu
@@ -50,6 +49,7 @@ protected:
 	{
 		return SumAl(vecAl, i) + SumDiAu(vecDiAu, i);
 	}
+
 
 	// Умножение i-той строки нижнего треугольника матрицы на вектор vec
 	real SumAl(vector<real> vec, int i)
@@ -66,6 +66,7 @@ protected:
 		return answer;
 	}
 
+
 	// Умножение i-той строки верхнего треугольника матрицы на вектор vecDiAu
 	real SumDiAu(vector<real> vec, int i)
 	{
@@ -81,4 +82,25 @@ protected:
 
 		return answer;
 	}
+
+	real FindMinW()
+	{
+		int mink = INT32_MAX;
+		real w = 0;
+
+		while (true)
+		{
+			int k = Solution(w);
+
+			if (k <= mink)
+				mink = k;
+			else
+				break;
+
+			w += 0.01;
+		}
+		return w;
+	};
+
+	virtual void Solution(real w) = 0;
 };

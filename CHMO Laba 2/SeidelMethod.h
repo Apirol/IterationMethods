@@ -1,10 +1,10 @@
 #pragma once
-#include "NotBlockMethod.h"
+#include "IterationMethod.h"
 
-class SeidelMethod : public NotBlockMethod
+class SeidelMethod : IterationMethod
 {
 public:
-	SeidelMethod(SLAE slae) : NotBlockMethod(slae) { };
+	SeidelMethod(SLAE slae) : IterationMethod(slae) { };
 
 	int Solution(real w) override
 	{
@@ -28,6 +28,4 @@ public:
 		return k;
 	}
 
-
-	void ReportSolution(ofstream* fout) override {};
 };
