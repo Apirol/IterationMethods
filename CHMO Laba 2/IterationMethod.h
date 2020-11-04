@@ -130,22 +130,28 @@ public:
 		for (int i = 0; i < slae.sizeMatrix; i++)
 			x_prec[i] = i + 1;
 
-		*fout << setprecision(2) << fixed;
-
-		*fout << "w = " << w << endl;
-		*fout << "x: " << endl;
-
-		*fout << setprecision(10) << scientific;
+		*fout << "w:\tx:\tx* - x:\tvA:\tk:" << endl;
 
 		for (int i = 0; i < slae.sizeMatrix; i++)
-			*fout << slae.X[i] << endl;
+		{
+			if (i == 0)
+				*fout << setprecision(2) << fixed << w << "\t";
+			else
+				*fout << " \t";
 
-		*fout << "x* - x: " << endl;
-		for (int i = 0; i < slae.sizeMatrix; i++)
-			*fout << x_prec[i] - slae.X[i] << endl;
+			*fout << setprecision(10) << scientific;
 
-		*fout << "vA = " << slae.Norm(slae.X - x_prec) / slae.Norm(x_prec) / Inconspicuous(slae.X) << endl;
-		*fout << "k = " << k << endl << endl;
+			*fout << slae.X[i] << "\t" << x_prec[i] - slae.X[i] << "\t";
+
+			if (i == 0)
+				*fout << slae.Norm(slae.X - x_prec) / slae.Norm(x_prec) / Inconspicuous(slae.X) << "\t" << k;
+			else
+				*fout << " \t \t";
+
+			*fout << endl;
+		}
+
+		*fout << endl;
 	}
 
 

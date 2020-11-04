@@ -13,8 +13,8 @@ int main()
 	JakobiMethod Jacobi{ slae };
 	Jacobi.ReportSolution("JacobyReport");
 
-	SeidelMethod Seidel{ slae };
-	Seidel.ReportSolution("SeidelSolution");
+	//SeidelMethod Seidel{ slae };
+	//Seidel.ReportSolution("SeidelSolution");
 
 	return 0;
 }

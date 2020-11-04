@@ -16,13 +16,13 @@
     <Filter Include="Файлы заголовков\Methods">
       <UniqueIdentifier>{48716810-0e17-41ee-b7e0-41081eee4f5c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Файлы заголовков\In/Out">
+    <Filter Include="Файлы заголовков\In">
       <UniqueIdentifier>{a0d1e56b-d549-4795-8381-d9979899d797}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InputSLAEHandler.h">
-      <Filter>Файлы заголовков\In/Out</Filter>
+      <Filter>Файлы заголовков\In</Filter>
     </ClInclude>
     <ClInclude Include="SLAE.h">
       <Filter>Файлы заголовков</Filter>
