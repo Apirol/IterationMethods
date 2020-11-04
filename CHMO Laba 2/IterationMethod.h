@@ -1,10 +1,11 @@
 #pragma once
 #include "Method.h"
 #include <iomanip>
+#include "Vector.h"
 
 class IterationMethod: Method
 {
-public:
+protected:
 
 	SLAE slae;
 
@@ -102,6 +103,10 @@ public:
 		return w;
 	};
 
+	virtual int Solution(real w) { return 0; };
+
+
+public:
 	void ReportSolution(string fileName)
 	{
 		ofstream fout;
@@ -153,7 +158,4 @@ public:
 
 		*fout << endl;
 	}
-
-
-	virtual int Solution(real w) { return 0; };
 };
