@@ -1,6 +1,6 @@
 #pragma once
 #include "Method.h"
-
+#include <iomanip>
 
 class IterationMethod: Method
 {
@@ -102,5 +102,52 @@ public:
 		return w;
 	};
 
-	virtual int Solution(real w) = 0;
+	void ReportSolution(string fileName)
+	{
+		ofstream fout;
+		fout.open(fileName + ".txt");
+		real wMax = FindMinW();
+		real w = 0;
+
+		while (w + 0.1 < wMax)
+		{
+			ReportForCurrentW(&fout, w);
+			w += 0.1;
+		}
+
+		while (w < wMax)
+		{
+			ReportForCurrentW(&fout, w);
+			w += 0.01;
+		}
+	}
+
+	void ReportForCurrentW(ofstream* fout, real w)
+	{
+		int k = Solution(w);
+		vector<real> x_prec(slae.sizeMatrix);
+
+		for (int i = 0; i < slae.sizeMatrix; i++)
+			x_prec[i] = i + 1;
+
+		*fout << setprecision(2) << fixed;
+
+		*fout << "w = " << w << endl;
+		*fout << "x: " << endl;
+
+		*fout << setprecision(10) << scientific;
+
+		for (int i = 0; i < slae.sizeMatrix; i++)
+			*fout << slae.X[i] << endl;
+
+		*fout << "x* - x: " << endl;
+		for (int i = 0; i < slae.sizeMatrix; i++)
+			*fout << x_prec[i] - slae.X[i] << endl;
+
+		*fout << "vA = " << slae.Norm(slae.X - x_prec) / slae.Norm(x_prec) / Inconspicuous(slae.X) << endl;
+		*fout << "k = " << k << endl << endl;
+	}
+
+
+	virtual int Solution(real w) { return 0; };
 };

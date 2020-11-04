@@ -30,9 +30,6 @@
     <ClInclude Include="Vector.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="OutputSolution.h">
-      <Filter>Файлы заголовков\In/Out</Filter>
-    </ClInclude>
     <ClInclude Include="JacobiMethod.h">
       <Filter>Файлы заголовков\Methods</Filter>
     </ClInclude>

@@ -1,9 +1,8 @@
 #pragma once
 #include "IterationMethod.h"
 
-class SeidelMethod : IterationMethod
+class SeidelMethod : public IterationMethod
 {
-
 public:
 	SeidelMethod(SLAE slae) : IterationMethod(slae) { };
 
@@ -28,5 +27,4 @@ public:
 		slae.X = xk;
 		return k;
 	}
-
 };

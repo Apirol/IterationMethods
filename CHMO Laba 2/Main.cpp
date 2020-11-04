@@ -2,6 +2,7 @@
 #include "JacobiMethod.h"
 #include "SeidelMethod.h"
 
+using namespace std;
 
 int main()
 {
@@ -10,14 +11,10 @@ int main()
 	slae.Init(input);
 
 	JakobiMethod Jacobi{ slae };
-	OutputSolution out{ "Jacoby" };
+	Jacobi.ReportSolution("JacobyReport");
 
-	out.ReportSolution(Jacobi);
-	
-	//Jacobi.Solution();
-
-	/*SeidelMethod Seidel{ slae };
-	Seidel.Solution();*/
+	SeidelMethod Seidel{ slae };
+	Seidel.ReportSolution("SeidelSolution");
 
 	return 0;
 }
