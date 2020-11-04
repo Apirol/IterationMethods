@@ -19,6 +19,9 @@
     <Filter Include="Файлы заголовков\In/Out">
       <UniqueIdentifier>{a0d1e56b-d549-4795-8381-d9979899d797}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы заголовков\Methods\NonBlockMethods">
+      <UniqueIdentifier>{8466cb79-e8ce-47a1-8989-19c29ebbd908}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InputSLAEHandler.h">
@@ -30,14 +33,14 @@
     <ClInclude Include="Vector.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="IterationMethod.h">
+      <Filter>Файлы заголовков\Methods\NonBlockMethods</Filter>
+    </ClInclude>
     <ClInclude Include="JacobiMethod.h">
-      <Filter>Файлы заголовков\Methods</Filter>
+      <Filter>Файлы заголовков\Methods\NonBlockMethods</Filter>
     </ClInclude>
     <ClInclude Include="SeidelMethod.h">
-      <Filter>Файлы заголовков\Methods</Filter>
-    </ClInclude>
-    <ClInclude Include="IterationMethod.h">
-      <Filter>Файлы заголовков\Methods</Filter>
+      <Filter>Файлы заголовков\Methods\NonBlockMethods</Filter>
     </ClInclude>
     <ClInclude Include="Method.h">
       <Filter>Файлы заголовков\Methods</Filter>

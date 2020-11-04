@@ -1,10 +1,11 @@
 #pragma once
 #include "Method.h"
 #include <iomanip>
+#include "Vector.h"
 
 class IterationMethod: Method
 {
-public:
+protected:
 
 	SLAE slae;
 
@@ -102,6 +103,10 @@ public:
 		return w;
 	};
 
+	virtual int Solution(real w) { return 0; };
+
+
+public:
 	void ReportSolution(string fileName)
 	{
 		ofstream fout;
@@ -147,7 +152,4 @@ public:
 		*fout << "vA = " << slae.Norm(slae.X - x_prec) / slae.Norm(x_prec) / Inconspicuous(slae.X) << endl;
 		*fout << "k = " << k << endl << endl;
 	}
-
-
-	virtual int Solution(real w) { return 0; };
 };
