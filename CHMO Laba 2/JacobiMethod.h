@@ -4,6 +4,9 @@
 
 class JakobiMethod : public IterationMethod
 {
+private:
+	real currentW;
+	int iterationCount;
 public:
 	JakobiMethod(SLAE slae) : IterationMethod(slae) { };
 
@@ -26,6 +29,6 @@ public:
 		}
 
 		slae.X = xk;
-		return k;
+		iterationCount = k;
 	}
 };

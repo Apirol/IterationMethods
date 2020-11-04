@@ -16,26 +16,11 @@
     <Filter Include="Файлы заголовков\Methods">
       <UniqueIdentifier>{48716810-0e17-41ee-b7e0-41081eee4f5c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Файлы заголовков\Methods\NotBlock">
-      <UniqueIdentifier>{6eff3fe4-8343-42b5-a5b3-4d0ca4b282b0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Файлы заголовков\Methods\Block">
-      <UniqueIdentifier>{3b668ccc-ef68-4a2e-b5b3-dbf2c84abd27}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Файлы заголовков\In/Out">
       <UniqueIdentifier>{a0d1e56b-d549-4795-8381-d9979899d797}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="JacobiMethod.h">
-      <Filter>Файлы заголовков\Methods\NotBlock</Filter>
-    </ClInclude>
-    <ClInclude Include="NotBlockMethod.h">
-      <Filter>Файлы заголовков\Methods\NotBlock</Filter>
-    </ClInclude>
-    <ClInclude Include="SeidelMethod.h">
-      <Filter>Файлы заголовков\Methods\NotBlock</Filter>
-    </ClInclude>
     <ClInclude Include="InputSLAEHandler.h">
       <Filter>Файлы заголовков\In/Out</Filter>
     </ClInclude>
@@ -45,17 +30,20 @@
     <ClInclude Include="Vector.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="IMethod.h">
-      <Filter>Файлы заголовков\Methods</Filter>
-    </ClInclude>
     <ClInclude Include="OutputSolution.h">
       <Filter>Файлы заголовков\In/Out</Filter>
     </ClInclude>
-    <ClInclude Include="BlockMethod.h">
-      <Filter>Файлы заголовков\Methods\Block</Filter>
+    <ClInclude Include="JacobiMethod.h">
+      <Filter>Файлы заголовков\Methods</Filter>
     </ClInclude>
-    <ClInclude Include="BlockRelax.h">
-      <Filter>Файлы заголовков\Methods\Block</Filter>
+    <ClInclude Include="SeidelMethod.h">
+      <Filter>Файлы заголовков\Methods</Filter>
+    </ClInclude>
+    <ClInclude Include="IterationMethod.h">
+      <Filter>Файлы заголовков\Methods</Filter>
+    </ClInclude>
+    <ClInclude Include="Method.h">
+      <Filter>Файлы заголовков\Methods</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

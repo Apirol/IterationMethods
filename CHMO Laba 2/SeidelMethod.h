@@ -3,6 +3,7 @@
 
 class SeidelMethod : IterationMethod
 {
+
 public:
 	SeidelMethod(SLAE slae) : IterationMethod(slae) { };
 

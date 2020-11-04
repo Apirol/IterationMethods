@@ -102,5 +102,5 @@ public:
 		return w;
 	};
 
-	virtual void Solution(real w) = 0;
+	virtual int Solution(real w) = 0;
 };

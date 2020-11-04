@@ -16,7 +16,7 @@ public:
 		this->filename = filename;
 	}
 
-	void ReportSolution(JakobiMethod method) 
+	void ReportSolution(IterationMethod method) 
 	{
 		ofstream fout;
 		fout.open(filename + ".txt");
@@ -28,7 +28,6 @@ public:
 			ReportForCurrentW(method, &fout, w);
 			w += 0.1;
 
-
 		}
 
 		while (w < wMax)
@@ -38,7 +37,7 @@ public:
 		}
 	};
 
-	void ReportForCurrentW(JakobiMethod method, ofstream *fout, real w)
+	void ReportForCurrentW(IterationMethod method, ofstream *fout, real w)
 	{
 		int k = method.Solution(w);
 		vector<real> x_prec(method.slae.sizeMatrix);
