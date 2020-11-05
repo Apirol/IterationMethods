@@ -22,19 +22,16 @@ protected:
 
 	inline real Inconspicuous(vector<real> vec)
 	{
-		return slae.Norm(slae.B - MatVecMult(vec)) / slae.normB;
+		MatVecMult(vec);
+		return slae.Norm(slae.B - vec) / slae.normB;
 	}
 
 
 	// Умножение матрицы на вектор
-	vector<real> MatVecMult(vector<real> vec)
+	void MatVecMult(vector<real> &vec)
 	{
-		vector<real> answer(slae.sizeMatrix);
-
 		for (int i = 0; i < slae.sizeMatrix; i++)
-			answer[i] = Sum(vec, i);
-
-		return answer;
+			vec[i] = Sum(vec, i);
 	}
 
 
