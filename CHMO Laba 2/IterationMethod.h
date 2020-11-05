@@ -30,8 +30,12 @@ protected:
 	// Умножение матрицы на вектор
 	void MatVecMult(vector<real> &vec)
 	{
+		vector<real> answer(slae.sizeMatrix);
+
 		for (int i = 0; i < slae.sizeMatrix; i++)
-			vec[i] = Sum(vec, i);
+			answer[i] = Sum(vec, i);
+
+		vec = answer;
 	}
 
 
@@ -132,7 +136,7 @@ public:
 		for (int i = 0; i < slae.sizeMatrix; i++)
 			x_prec[i] = i + 1;
 
-		*fout << "w:\tx:\tx* - x:\tvA:\tk:" << endl;
+		//*fout << "w:\tx:\tx* - x:\tvA:\tk:" << endl;
 
 		for (int i = 0; i < slae.sizeMatrix; i++)
 		{
@@ -153,6 +157,6 @@ public:
 			*fout << endl;
 		}
 
-		*fout << endl;
+		//*fout << endl;
 	}
 };
